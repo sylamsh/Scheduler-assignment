@@ -11,17 +11,20 @@ app.get('/', (req, res) => {
     res.send(date.toISOString())
 })
 
-const callback = (arr, idx) => {
+const callback = (arr, idx, currDate) => {
     if(idx >= arr.length)
         return
+    const scheduledDate = new Date(arr[idx].dateTime)
     setTimeout(()=>{
-        console.log(arr[idx].text.split('').reverse().join('') + ' ' + arr[idx].text.length + 's')
-        callback(arr, idx+1)
-    }, arr[idx].text.length * 1000)
+        let nowDate = new Date
+        console.log(arr[idx].text.split('').reverse().join('') + ' ' + nowDate.toLocaleString())
+        callback(arr, idx+1, currDate)
+    }, (scheduledDate - currDate) + arr[idx].text.length * 1000)
 }
 
 app.post('/post', (req, res) => {
-    callback(req.body.events, 0)
+    const currDate =  new Date
+    callback(req.body.events, 0, currDate)
     res.send("check the console")
 })
 
