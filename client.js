@@ -1,18 +1,23 @@
 import fetch from 'node-fetch';
 const baseURL = "https://sylamsh-scheduler.herokuapp.com"
+// const baseURL = "http://localhost:3350"
 
 const texts = ["textOne", "textTwo", "textThree", "textFour", "textFive", "textSix", "textSeven", "textEight", "textNine", "textFinal"]
 const dateTimes = []
 for(var i=0; i<10; i++) {
-    var nowDate = new Date(Date.now() + (Math.random() * 30000))
+    var nowDate = new Date(Date.now() + (Math.random() * 21000))
     dateTimes.push(nowDate.toISOString().replace('Z', '').split('T').join(' '))
 }
 
-dateTimes.sort()
-// console.log(dateTimes)
+const getServer = async () => {
+    await fetch(baseURL)
+    .then(res => res.json())
+    .then(data => console.log(data.text))
+    .catch(err => console.log(err))
+}
 
-for(let i=0; i<10; i++) {
-    fetch(baseURL + '/event', {
+const postScheduler = async (i) => { 
+    await fetch(baseURL + '/scheduler', {
         method: 'POST',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -26,4 +31,15 @@ for(let i=0; i<10; i++) {
     .then(res => res.json())
     .then(data => console.log(data.text))
     .catch(err => console.log(err))
+}
+
+
+// DRIVER CODE
+dateTimes.sort()
+console.log(dateTimes)
+
+getServer()
+
+for(let i=0; i<10; i++) {
+    postScheduler(i)
 }
