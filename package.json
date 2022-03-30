@@ -1,18 +1,24 @@
 {
-  "name": "assignment",
+  "name": "loop-script",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  "main": "client.js",
+  "type" : "module",
   "scripts": {
-    "start": "nodemon App.js",
-    "dev": "nodemon App.js"
+    "start": "node client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylamsh/Scheduler-assignment.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3"
+  "bugs": {
+    "url": "https://github.com/Sylamsh/Scheduler-assignment/issues"
   },
-  "devDependencies": {
-    "@babel/preset-env": "^7.16.11"
+  "homepage": "https://github.com/Sylamsh/Scheduler-assignment#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.3"
   }
 }
