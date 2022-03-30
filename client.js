@@ -1,48 +1,15 @@
 import fetch from 'node-fetch';
-const baseURL = "http://localhost:3350"
+const baseURL = "https://sylamsh-scheduler.herokuapp.com"
 
-const events = [
-    {
-        text: "textOne",
-        dateTime: new Date(Date.now() - 1000)
-    },
-    {
-        text: "textTwo",
-        dateTime: new Date(Date.now() + 5000)
-    },
-    {
-        text: "textThree",
-        dateTime: new Date(Date.now() + 15000)
-    },
-    {
-        text: "textFour",
-        dateTime: new Date(Date.now() + 30000)
-    },
-    {
-        text: "textFive",
-        dateTime: new Date(Date.now() + 30000)
-    },
-    {
-        text: "textSix",
-        dateTime: new Date(Date.now() + 31000)
-    },
-    {
-        text: "textSeven",
-        dateTime: new Date(Date.now() + 35000)
-    },
-    {
-        text: "textEight",
-        dateTime: new Date(Date.now() + 50000)
-    },
-    {
-        text: "textNine",
-        dateTime: new Date(Date.now() + 57000)
-    },
-    {
-        text: "textFinal",
-        dateTime: new Date(Date.now() + 60000)
-    },
-]
+const texts = ["textOne", "textTwo", "textThree", "textFour", "textFive", "textSix", "textSeven", "textEight", "textNine", "textFinal"]
+const dateTimes = []
+for(var i=0; i<10; i++) {
+    var nowDate = new Date(Date.now() + (Math.random() * 30000))
+    dateTimes.push(nowDate.toISOString().replace('Z', '').split('T').join(' '))
+}
+
+dateTimes.sort()
+// console.log(dateTimes)
 
 for(let i=0; i<10; i++) {
     fetch(baseURL + '/event', {
@@ -51,7 +18,10 @@ for(let i=0; i<10; i++) {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(events[i])
+        body: JSON.stringify({
+            text: texts[i],
+            dateTime: dateTimes[i]
+        })
     })
     .then(res => res.json())
     .then(data => console.log(data.text))

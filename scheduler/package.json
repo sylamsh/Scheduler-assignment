@@ -2,11 +2,11 @@
   "name": "assignment",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "author": "",
   "license": "ISC",
