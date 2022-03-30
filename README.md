@@ -21,15 +21,22 @@ The [Scheduler](https://github.com/Sylamsh/Scheduler-assignment/blob/main/schedu
 
 | Route  | Request  | Description |
 | :----- |:-------- | :---------- |
-| `/` | GET | Wake heroku server to load resources |
+| `/` | GET | To check if the server is running |
 | `/scheduler` | POST | Schedules an event to trigger 'triggerFunction' |
 | `/triggerFunction` | POST | Sleeps for the length of the text and responses with the reversed text |
 
 ### Problems faced
-
 1. Heroku-hosted server sleeps after some time of inactivity. 
 Hence, for the first couple of requests, the scheduled time is passed by the time, the request is received by the server.  
-_Solved_ : A get request was sent before the scheduler requests, to wake the server from sleep.
+_Not Solved_ : A get request was sent before the scheduler requests, to wake the server from sleep.
 
 2. Heroku-hosted server sends back status:503 "request timed out", if there is no response after 30s since the request was sent.  
 _Solved_ : Test cases were limited within the range of the 30s 
+
+### To run
+At the root folder
+
+```
+npm install  
+npm start
+```

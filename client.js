@@ -36,7 +36,7 @@ const postScheduler = async (i) => {
 
 // DRIVER CODE
 dateTimes.sort()
-console.log(dateTimes)
+// console.log(dateTimes)
 
 getServer()
 
